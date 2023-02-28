@@ -12,11 +12,11 @@ def pil_loader(path):
 
 class MiniImagenet(data.Dataset):
 
-    base_folder = '/data/lisa/data/miniimagenet'
+    base_folder = '/home/ju/truenas/Jonathan/jonathan/data/miniimagenet/'
     filename = 'miniimagenet.zip'
     splits = {
         'train': 'train.csv',
-        'valid': 'val.csv',
+        'valid': 'test.csv',
         'test': 'test.csv'
     }
 

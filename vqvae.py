@@ -96,11 +96,11 @@ def main(args):
         ])
         # Define the train, valid & test datasets
         train_dataset = MiniImagenet(args.data_folder, train=True,
-            download=True, transform=transform)
+            download=False, transform=transform)
         valid_dataset = MiniImagenet(args.data_folder, valid=True,
-            download=True, transform=transform)
+            download=False, transform=transform)
         test_dataset = MiniImagenet(args.data_folder, test=True,
-            download=True, transform=transform)
+            download=False, transform=transform)
         num_channels = 3
 
     # Define the data loaders
@@ -128,9 +128,10 @@ def main(args):
 
     best_loss = -1.
     for epoch in range(args.num_epochs):
+        print('epoch: {}'.format(epoch))
         train(train_loader, model, optimizer, args, writer)
         loss, _ = test(valid_loader, model, args, writer)
-
+        print('loss: {:.3f}'.format(loss))
         reconstruction = generate_samples(fixed_images, model, args)
         grid = make_grid(reconstruction.cpu(), nrow=8, range=(-1, 1), normalize=True)
         writer.add_image('reconstruction', grid, epoch + 1)
